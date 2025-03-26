@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Exemplo_3_Endpoint_ASPNET_Banco.Models;
 
 // Para fazer a ligação com o banco de dados, vamos usar o Entity Framework Core
 using Microsoft.EntityFrameworkCore; // Importa o namespace do Entity Framework
@@ -21,6 +22,9 @@ namespace Exemplo_3_Endpoint_ASPNET_Banco.database
         }
 
         // Vamos criar um DbSet para cada tabela do banco de dados
-        public DbSet<Models.Usuario> Usuarios {get; set;}
+        public DbSet<Usuario> Usuarios {get; set;}
+
+        public DbSet<Maquina> Maquinas {get; set;}
+        public DbSet<Software> Softwares {get; set;}
     }
 }
