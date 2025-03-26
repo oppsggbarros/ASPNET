@@ -14,28 +14,41 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
-using Exemplo_ASPNET_EndPoint.database;
+using Exemplo_3_Endpoint_ASPNET_Banco.database;
 
-    public class Exec
+namespace Exemplo_3_Endpoint_ASPNET_Banco
+{
+    public class Executar
     {
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-            builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(connectionString));
+            // Configurar a string de conexão com o banco de dados
+            var conncetionString = builder.Configuration.GetConnectionString("PostgresConnection"); // Pega a string de conexão do arquivo appsettings.json
 
-            builder.Services.AddControllers();
+            // Registar o AppDbContext com Postgres
+            builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(conncetionString)); // Adiciona o serviço de banco de dados
 
+            builder.Services.AddControllers(); // Adiciona o serviço de controllers
+
+            // Habilitar o Swagger
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
             var app = builder.Build();
 
+            // Vou Chamar o Swagger
             app.UseSwagger();
             app.UseSwaggerUI();
-            app.UseHttpsRedirection();
-            app.UseAuthorization();
-            app.MapControllers();
+
+            app.UseHttpsRedirection(); // Redireciona para HTTPS
+            
+            app.UseAuthorization(); // Habilita a autorização
+
+            app.MapControllers(); // Mapeia os controllers
+
             app.Run();
         }
     }
+}
