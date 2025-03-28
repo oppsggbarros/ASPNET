@@ -1,40 +1,84 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Cadastro de Usuários</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        form {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f5f5f5;
+            border-radius: 5px;
+        }
+        input {
+            padding: 8px;
+            margin: 5px 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 8px 15px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button.edit {
+            background: #2196F3;
+        }
+        button.delete {
+            background: #f44336;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
 
 <body>
     <div class="container">
-        <h1>Cadastro de Usuarios</h1>
+        <h1>Cadastro de Usuários</h1>
         <form id="usuarioform">
             <input type="hidden" id="id">
-            <input type="text" id="nome" placeholder="Nome do Usuario">
-            <input type="password" id="senha" placeholder="Senha" required>
+            <input type="text" id="nome" placeholder="Nome do Usuário" required>
+            <input type="password" id="password" placeholder="Senha" required>
             <input type="number" id="ramal" placeholder="Ramal" required>
             <input type="text" id="especialidade" placeholder="Especialidade" required>
             <button type="submit">Salvar</button>
         </form>
 
-        <h2>Lista de Usuarios</h2>
+        <h2>Lista de Usuários</h2>
         <table id="tabelaUsuarios">
             <thead>
                 <tr>
+                    <th>ID</th>
                     <th>Nome</th>
-                    <th>Senha</th>
                     <th>Ramal</th>
                     <th>Especialidade</th>
                     <th>Ações</th>
                 </tr>
             </thead>
-            <tbody>
-
-            </tbody>
+            <tbody></tbody>
         </table>
-
     </div>
     <script src="script.js"></script>
 </body>

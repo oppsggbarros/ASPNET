@@ -41,6 +41,9 @@ namespace Exemplo_3_Endpoint_ASPNET_Banco
             // Vou Chamar o Swagger
             app.UseSwagger();
             app.UseSwaggerUI();
+            
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
 
             app.UseHttpsRedirection(); // Redireciona para HTTPS
             
