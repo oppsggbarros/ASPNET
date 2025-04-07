@@ -1,0 +1,22 @@
+@ExemploASPNET_CORE_HostAddress = http://localhost:5105
+
+GET {{ExemploASPNET_CORE_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
+# testar get
+POST http://localhost:5293/Usuario
+Content-Type: application/json
+{
+    "nome": "João",
+    "email": "joao@gmail.com",
+}
+
+PUT http://localhost:5293/Usuario/1
+Content-Type: application/json
+{
+    "nome": "João",
+    "email": "joao@gmail.com",
+}
+
+DELETE http://localhost:5293/Usuario/1
