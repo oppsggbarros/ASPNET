@@ -1,4 +1,4 @@
-Microsoft Visual Studio Solution File, Format Version 12.00
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.2.0
 MinimumVisualStudioVersion = 10.0.40219.1
@@ -9,6 +9,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exemplo_2_ASPNET_ENDPOINT", "ASP.Net-main\Exemplo_2_ASPNET_ENDPOINT\Exemplo_2_ASPNET_ENDPOINT.csproj", "{D3125499-29F5-CE70-5FA0-ED640DE76E12}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exemplo_3_Endpoint_ASPNET_Banco", "ASP.Net-main\Exemplo_3_Endpoint_ASPNET_Banco\Exemplo_3_Endpoint_ASPNET_Banco.csproj", "{D851D9DC-806D-07CA-9E45-EC31D64890D0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SistemaEscolarAPI", "SistemaEscolarAPI\SistemaEscolarAPI.csproj", "{0A3F45B4-5700-4375-8050-F88E0DA4033C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,6 +30,10 @@ Global
 		{D851D9DC-806D-07CA-9E45-EC31D64890D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D851D9DC-806D-07CA-9E45-EC31D64890D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D851D9DC-806D-07CA-9E45-EC31D64890D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A3F45B4-5700-4375-8050-F88E0DA4033C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A3F45B4-5700-4375-8050-F88E0DA4033C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A3F45B4-5700-4375-8050-F88E0DA4033C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A3F45B4-5700-4375-8050-F88E0DA4033C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
