@@ -7,19 +7,22 @@ using SistemaEscolarAPI.Models;
 
 namespace SistemaEscolarAPI.DB
 {
-    public class AppDbContext
+    public class AppDbContext : DbContext
     {
         public DbSeet<Aluno> Alunos { get; set; }
         public DbSet<Curso> Cursos { get; set; }
-        public DbSet<DisciplinaAlunoCurso> Disciplinas { get; set; }
+        public DbSet<Disciplina> Disciplinas { get; set; }
+        public DbSet<DisciplinaAlunoCurso> DisciplinasAlunosCursos { get; set; }
+
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<DisciplinaAlunoCurso()
-                .haskey(decimal => new { dc.AlunoId, dc.DisciplinaId, dc.CursoId });
+            modelBuilder.Entity<DisciplinaAlunoCurso>() // Configura a entidade DisciplinaAlunoCurso
+                .HasKey(dc => new { dc.AlunoId, dc.DisciplinaId, dc.CursoId });
+            // HasKey é usado para definir a chave primária composta da tabela de junção
         }
     }
 }

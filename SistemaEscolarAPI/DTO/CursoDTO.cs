@@ -7,6 +7,6 @@ namespace SistemaEscolarAPI.DTO
 {
     public class CursoDTO
     {
-        
+        public string Descricao { get; set; }
     }
 }
