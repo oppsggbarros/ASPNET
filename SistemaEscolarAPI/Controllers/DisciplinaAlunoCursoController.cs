@@ -6,33 +6,54 @@ using SistemaEscolarAPI.Models;
 using SistemaEscolarAPI.DB;
 using SistemaEscolarAPI.DTO;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace SistemaEscolarAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class DisciplinaAlunoCurso : ControllerBase
+    public class DisciplinaAlunoCursoController : ControllerBase
     {
         private readonly AppDbContext _context;
 
-        public DisciplinaAlunoCurso(AppDbContext context)
+        public DisciplinaAlunoCursoController(AppDbContext context)
         {
             _context = context;
         }
 
-        [HttpGet]
+        [HttpGet] // Método para obter todas as disciplinas
         public async Task<ActionResult<IEnumerable<DisciplinaAlunoCursoDTO>>> Get()
+        // async para deixar a opreação assíncrona e não bloquear o thread
+        // Task<ActionResult<IEnumerable<DisciplinaAlunoCursoDTO>>> para retornar uma lista de DTOs de disciplinas
+        // IEnumerable<DisciplinaAlunoCursoDTO> é uma interface que representa uma coleção de objetos do tipo DisciplinaAlunoCursoDTO
+        // ActionResult é uma classe base para resultados de ação em controladores ASP.NET
         {
-            var disciplinasAlunosCursos = await _context.DisciplinasAlunosCursos.ToListAsync();
-            return Ok(disciplinasAlunosCursos.Select(d => new DisciplinaAlunoCursoDTO { Id = d.Id, Descricao = d.Descricao }));
+            var regitros = await _context.DisciplinasAlunosCursos
+              .Select(d => new DisciplinaAlunoCursoDTO
+              {
+                  AlunoID = d.AlunoID,
+                  CursoId = d.CursoID,
+                  DisciplinaID = d.DisciplinaID,
+              })
+              .ToListAsync(); // Converte para uma lista assíncrona
+
+
+            return Ok(regitros); // Retorna a lista de disciplinas com status 200 OK
         }
 
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] DisciplinaAlunoCursoDTO disciplinaAlunoCursoDTO)
         {
-            var disciplinaAlunoCurso = new DisciplinaAlunoCurso { Descricao = disciplinaAlunoCursoDTO.Descricao };
-            _context.DisciplinasAlunosCursos.Add(DisciplinaAlunoCurso);
+            var entidade = new DisciplinaAlunoCurso
+            {
+                AlunoID = disciplinaAlunoCursoDTO.AlunoID,
+                CursoID = disciplinaAlunoCursoDTO.CursoID,
+                DisciplinaID = disciplinaAlunoCursoDTO.DisciplinaID
+            };
+            _context.DisciplinasAlunosCursos.Add(entidade);
             await _context.SaveChangesAsync();
+
             return Ok();
         }
 

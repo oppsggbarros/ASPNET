@@ -7,8 +7,8 @@ namespace SistemaEscolarAPI.DTO
 {
     public class DisciplinaAlunoCursoDTO
     {
-        public int AlunoId { get; set; }
-        public int DisciplinaId { get; set; }
-        public int CursoId { get; set; }
+        public int AlunoID { get; set; }
+        public int DisciplinaID { get; set; }
+        public int CursoID { get; set; }
     }
 }

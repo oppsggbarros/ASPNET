@@ -6,6 +6,7 @@ using SistemaEscolarAPI.Models;
 using SistemaEscolarAPI.DTO;
 using SistemaEscolarAPI.DB;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace SistemaEscolarAPI.Controllers
@@ -23,9 +24,16 @@ namespace SistemaEscolarAPI.Controllers
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CursoDTO>>> Get()
+        // async para deixar a opreação assíncrona e não bloquear o thread
+        // Task<ActionResult<IEnumerable<CursoDTO>>> para retornar uma lista de DTOs de cursos
+        // IEnumerable<CursoDTO> é uma interface que representa uma coleção de objetos do tipo CursoDTO
+        // ActionResult é uma classe base para resultados de ação em controladores ASP.NET
         {
-            var cursos = await _context.Cursos.ToListAsync();
-            return Ok(cursos.Select(c => new CursoDTO { Id = c.Id, Descricao = c.Descricao }));
+            var cursos = await _context.Cursos
+                .Select(cursos => new CursoDTO { Descricao = cursos.Descricao }) // Seleciona os cursos e projeta em um DTO
+                .ToListAsync(); // Converte para uma lista assíncrona
+
+            return Ok(cursos); // Retorna a lista de cursos com status 200 OK
         }
 
         [HttpPost]

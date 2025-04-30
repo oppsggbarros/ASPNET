@@ -6,6 +6,7 @@ using SistemaEscolarAPI.Models;
 using SistemaEscolarAPI.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using SistemaEscolarAPI.DB;
 
 namespace SistemaEscolarAPI.Controllers
 {
