@@ -15,5 +15,7 @@ namespace SistemaEscolarAPI.Models
 
         public int CursoID { get; set; }
         public Curso Curso { get; set; }
+
+        public string Descricao { get; set; }
     }
 }

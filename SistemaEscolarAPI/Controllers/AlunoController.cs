@@ -23,8 +23,8 @@ namespace SistemaEscolarAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AlunoDTO>>> Get()
         {
-            var alunos = await _context.Alunos.Include(a => a.Turma)
-                .Select(alunos => new AlunoDTO { Nome = alunos.Nome, Curso = alunos.Curso })
+            var alunos = await _context.Alunos.Include(a => a.Curso)
+                .Select(alunos => new AlunoDTO { Nome = alunos.Nome, Curso = alunos.Curso.Descricao })
                     .ToListAsync();
             return Ok(alunos);
 
@@ -32,7 +32,7 @@ namespace SistemaEscolarAPI.Controllers
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] AlunoDTO alunoDTO)
         {
-            var Curso = await _context.Curso.FistOrDefaultAsync(c => c.Descricao == alunoDTO.Curso);
+            var Curso = await _context.Cursos.FirstOrDefaultAsync(c => c.Descricao == alunoDTO.Curso);
             if (Curso == null) return BadRequest("Curso não encontrado");
 
             var aluno = new Aluno { Nome = alunoDTO.Nome, CursoId = Curso.Id };
@@ -45,12 +45,12 @@ namespace SistemaEscolarAPI.Controllers
         {
             var aluno = await _context.Alunos.FindAsync(id);
             if (aluno == null) return NotFound("Aluno não encontrado");
-            var Curso = await _context.Cursos.FistOrDefaultAsync(c => c.Descricao == alunoDTO.Curso);
+            var Curso = await _context.Cursos.FirstOrDefaultAsync(c => c.Descricao == alunoDTO.Curso);
             if (Curso == null) return BadRequest("Curso não encontrado");
 
             aluno.Nome = alunoDTO.Nome;
 
-            aluno.CursoId = Curso.ID;
+            aluno.CursoId = Curso.Id;
             _context.Alunos.Update(aluno);
             await _context.SaveChangesAsync();
             return Ok();

@@ -5,13 +5,14 @@ using System.Threading.Tasks;
 using SistemaEscolarAPI.Models;
 using SistemaEscolarAPI.DTO;
 using SistemaEscolarAPI.DB;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 
 namespace SistemaEscolarAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class DisciplinaController
+    public class DisciplinaController : ControllerBase
     {
         private readonly AppDbContext _context;
 
@@ -24,7 +25,7 @@ namespace SistemaEscolarAPI.Controllers
         public async Task<ActionResult<IEnumerable<DisciplinaDTO>>> Get()
         {
             var disciplinas = await _context.Disciplinas.ToListAsync();
-            return Ok(disciplinas.Select(d => new DisciplinaDTO { Id = d.Id, Descricao = d.Descricao }));
+            return Ok(disciplinas.Select(d => new DisciplinaDTO { ID = d.Id, Descricao = d.Descricao }));
         }
 
         [HttpPost]

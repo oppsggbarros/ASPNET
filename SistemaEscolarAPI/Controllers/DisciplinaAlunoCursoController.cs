@@ -33,7 +33,7 @@ namespace SistemaEscolarAPI.Controllers
               .Select(d => new DisciplinaAlunoCursoDTO
               {
                   AlunoID = d.AlunoID,
-                  CursoId = d.CursoID,
+                  CursoID = d.CursoID,
                   DisciplinaID = d.DisciplinaID,
               })
               .ToListAsync(); // Converte para uma lista assíncrona
