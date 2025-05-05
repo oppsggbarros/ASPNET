@@ -6,7 +6,7 @@ using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using SistemaEscolarAPI.DTO;
 using SistemaEscolarAPI.Models;
-// using SistemaEscolarAPI.Services;
+using SistemaEscolarAPI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http.HttpResults;
 
@@ -36,7 +36,7 @@ namespace SistemaEscolarAPI.Controllers
             if (user == null) {
                 return Unauthorized(new { message = "Usuario ou Senha invalido"});}
 
-            var token = TokenService.GenerateToken(user);
+            var token = TokenServices.GenerateToken(user);
             return Ok(new {token});
         }
     }

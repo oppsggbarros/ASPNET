@@ -9,8 +9,10 @@ using System.Text;
 using SistemaEscolarAPI.DB;
 using SistemaEscolarAPI.Models;
 using SistemaEscolarAPI.DTOs;
+using System.IdentityModel.Tokens.Jwt;
 
 using Microsoft.OpenApi.Models;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +27,16 @@ builder.Services.AddSwaggerGen(c => // para gerar a documentação lá em baixar
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Sistema Escolar API", Version = "v1" }); // Define o título e a versão da API na documentação do Swagger
 });
+// var jwtKey = builder.Configuration["Jwt:Key"];
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        Options.TokenValidationParameters = new TokenValidationParameters {
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("my_secret_key")),
+            ValidateIssuer = false,
+            ValidateAudience = false
+        };
+    });
 
 var app = builder.Build();
 
@@ -32,8 +44,15 @@ var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
 
-// app.UseAuthentication();
-// app.UseAuthorization();
+app.UseAuthentication();
+app.UseAuthorization();
+
+app.UseStaticFiles();
+app.UseAuthorization();
+
+app.
+
+
 app.MapControllers(); // Mapeia os controladores
 app.Run();
 
