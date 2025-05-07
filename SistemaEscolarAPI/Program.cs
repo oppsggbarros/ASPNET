@@ -1,7 +1,7 @@
 // Comando para colcoar os migrations no banco de dados
 // dotnet ef migrations add InitialCreate
 // dotnet ef database update
-// using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using FluentValidation.AspNetCore;
@@ -31,7 +31,7 @@ builder.Services.AddSwaggerGen(c => // para gerar a documentação lá em baixar
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
-        Options.TokenValidationParameters = new TokenValidationParameters {
+        options.TokenValidationParameters = new TokenValidationParameters {
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("my_secret_key")),
             ValidateIssuer = false,
             ValidateAudience = false
@@ -49,9 +49,6 @@ app.UseAuthorization();
 
 app.UseStaticFiles();
 app.UseAuthorization();
-
-app.
-
 
 app.MapControllers(); // Mapeia os controladores
 app.Run();
